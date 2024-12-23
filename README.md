@@ -1,2 +1,7 @@
-# ff-fb-test-project
-ff-fb-test-project
+# fb-test-project
+
+A new Flutter project.
+
+## Getting Started
+
+FlutterFlow projects are built to run on the Flutter _stable_ release.
