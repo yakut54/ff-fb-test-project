@@ -43,6 +43,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HomePage',
           path: '/homePage',
           builder: (context, params) => const HomePageWidget(),
+        ),
+        FFRoute(
+          name: 'StartPage',
+          path: '/startPage',
+          builder: (context, params) => const StartPageWidget(),
+        ),
+        FFRoute(
+          name: 'SMSPage',
+          path: '/sMSPage',
+          builder: (context, params) => const SMSPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
