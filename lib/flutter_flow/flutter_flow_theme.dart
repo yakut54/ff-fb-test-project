@@ -54,6 +54,11 @@ abstract class FlutterFlowTheme {
   late Color error;
   late Color info;
 
+  late Color passiveColor;
+  late Color grey;
+  late Color black;
+  late Color white;
+
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
   @Deprecated('Use displaySmall instead')
@@ -125,7 +130,7 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF4B39EF);
+  late Color primary = const Color(0xFF8087F8);
   late Color secondary = const Color(0xFF39D2C0);
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFFE0E3E7);
@@ -141,6 +146,11 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
+
+  late Color passiveColor = const Color(0x528087F8);
+  late Color grey = const Color(0xFF636363);
+  late Color black = const Color(0xFF000000);
+  late Color white = const Color(0xFFFFFFFF);
 }
 
 abstract class Typography {
@@ -181,107 +191,107 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Inter Tight';
+  String get displayLargeFamily => 'Lato';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'Inter Tight',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 64.0,
       );
-  String get displayMediumFamily => 'Inter Tight';
+  String get displayMediumFamily => 'Lato';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'Inter Tight',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 44.0,
       );
-  String get displaySmallFamily => 'Inter Tight';
+  String get displaySmallFamily => 'Lato';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'Inter Tight',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Inter Tight';
+  String get headlineLargeFamily => 'Lato';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Inter Tight',
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 32.0,
+        'Lato',
+        color: theme.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 34.0,
       );
-  String get headlineMediumFamily => 'Inter Tight';
+  String get headlineMediumFamily => 'Lato';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Inter Tight',
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 28.0,
+        'Lato',
+        color: theme.black,
+        fontWeight: FontWeight.w500,
+        fontSize: 17.0,
       );
-  String get headlineSmallFamily => 'Inter Tight';
+  String get headlineSmallFamily => 'Lato';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Inter Tight',
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 24.0,
+        'Lato',
+        color: theme.grey,
+        fontWeight: FontWeight.w500,
+        fontSize: 13.0,
       );
-  String get titleLargeFamily => 'Inter Tight';
+  String get titleLargeFamily => 'Lato';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'Inter Tight',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Inter Tight';
+  String get titleMediumFamily => 'Lato';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'Inter Tight',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Inter Tight';
+  String get titleSmallFamily => 'Lato';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'Inter Tight',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Inter';
+  String get labelLargeFamily => 'Lato';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Inter',
+        'Lato',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Inter';
+  String get labelMediumFamily => 'Lato';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Inter',
+        'Lato',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Inter';
+  String get labelSmallFamily => 'Lato';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Inter',
+        'Lato',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Inter';
+  String get bodyLargeFamily => 'Lato';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Inter',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Inter';
+  String get bodyMediumFamily => 'Lato';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Inter',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Inter';
+  String get bodySmallFamily => 'Lato';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Inter',
+        'Lato',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -296,7 +306,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF4B39EF);
+  late Color primary = const Color(0xFF8087F8);
   late Color secondary = const Color(0xFF39D2C0);
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFF262D34);
@@ -312,6 +322,11 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
+
+  late Color passiveColor = const Color(0x528087F8);
+  late Color grey = const Color(0xFF636363);
+  late Color black = const Color(0xFF000000);
+  late Color white = const Color(0xFFFFFFFF);
 }
 
 extension TextStyleHelper on TextStyle {
