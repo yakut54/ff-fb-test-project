@@ -1,6 +1,9 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'start_page_model.dart';
 export 'start_page_model.dart';
@@ -22,8 +25,10 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     super.initState();
     _model = createModel(context, () => StartPageModel());
 
-    _model.textController ??= TextEditingController(text: '+7');
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.phoneFieldTextController ??= TextEditingController(text: '+7');
+    _model.phoneFieldFocusNode ??= FocusNode();
+
+    authManager.handlePhoneAuthStateChanges(context);
   }
 
   @override
@@ -83,8 +88,13 @@ class _StartPageWidgetState extends State<StartPageWidget> {
                       child: SizedBox(
                         width: double.infinity,
                         child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
+                          controller: _model.phoneFieldTextController,
+                          focusNode: _model.phoneFieldFocusNode,
+                          onChanged: (_) => EasyDebounce.debounce(
+                            '_model.phoneFieldTextController',
+                            const Duration(milliseconds: 100),
+                            () => safeSetState(() {}),
+                          ),
                           autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -135,16 +145,60 @@ class _StartPageWidgetState extends State<StartPageWidget> {
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lato',
                                     letterSpacing: 0.0,
+                                    lineHeight: 2.0,
                                   ),
+                          keyboardType: TextInputType.phone,
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          validator: _model.textControllerValidator
+                          validator: _model.phoneFieldTextControllerValidator
                               .asValidator(context),
+                          inputFormatters: [_model.phoneFieldMask],
                         ),
                       ),
                     ),
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        if (functions.checkPhoneNumber(
+                            _model.phoneFieldTextController.text)) {
+                          final phoneNumberVal =
+                              _model.phoneFieldTextController.text;
+                          if (phoneNumberVal.isEmpty ||
+                              !phoneNumberVal.startsWith('+')) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Phone Number is required and has to start with +.'),
+                              ),
+                            );
+                            return;
+                          }
+                          await authManager.beginPhoneAuth(
+                            context: context,
+                            phoneNumber: phoneNumberVal,
+                            onCodeSent: (context) async {
+                              context.goNamedAuth(
+                                'SMSPage',
+                                context.mounted,
+                                ignoreRedirect: true,
+                              );
+                            },
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Bla-bla-bla',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                          return;
+                        }
                       },
                       text: 'Войти',
                       options: FFButtonOptions(
@@ -154,7 +208,10 @@ class _StartPageWidgetState extends State<StartPageWidget> {
                             16.0, 0.0, 16.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
+                        color: functions.checkPhoneNumber(
+                                _model.phoneFieldTextController.text)
+                            ? FlutterFlowTheme.of(context).primary
+                            : FlutterFlowTheme.of(context).grey,
                         textStyle:
                             FlutterFlowTheme.of(context).labelLarge.override(
                                   fontFamily: 'Lato',

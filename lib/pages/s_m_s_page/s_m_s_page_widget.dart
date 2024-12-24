@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -44,10 +45,19 @@ class _SMSPageWidgetState extends State<SMSPageWidget> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: true,
-          leading: Icon(
-            Icons.chevron_left,
-            color: FlutterFlowTheme.of(context).grey,
-            size: 24.0,
+          leading: InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () async {
+              context.safePop();
+            },
+            child: Icon(
+              Icons.chevron_left,
+              color: FlutterFlowTheme.of(context).grey,
+              size: 24.0,
+            ),
           ),
           actions: const [],
           centerTitle: true,
@@ -125,8 +135,27 @@ class _SMSPageWidgetState extends State<SMSPageWidget> {
                       ),
                     ),
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        GoRouter.of(context).prepareAuthEvent();
+                        final smsCodeVal = _model.pinCodeController!.text;
+                        if (smsCodeVal.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Enter SMS verification code.'),
+                            ),
+                          );
+                          return;
+                        }
+                        final phoneVerifiedUser =
+                            await authManager.verifySmsCode(
+                          context: context,
+                          smsCode: smsCodeVal,
+                        );
+                        if (phoneVerifiedUser == null) {
+                          return;
+                        }
+
+                        context.goNamedAuth('HomePage', context.mounted);
                       },
                       text: 'Подтвердить',
                       options: FFButtonOptions(
