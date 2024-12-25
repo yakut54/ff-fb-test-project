@@ -47,3 +47,9 @@ bool isButtonActive(
 ) {
   return (isDriver || isPassenger) && from.isNotEmpty && to.isNotEmpty;
 }
+
+bool checkDate(DateTime? date) {
+  print('date >>> $date');
+
+  return true;
+}

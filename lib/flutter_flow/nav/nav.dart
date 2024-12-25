@@ -117,6 +117,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CreateTripPage',
           path: '/createTripPage',
           builder: (context, params) => const CreateTripPageWidget(),
+        ),
+        FFRoute(
+          name: 'AddCarPage',
+          path: '/addCarPage',
+          builder: (context, params) => const AddCarPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
