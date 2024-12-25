@@ -211,7 +211,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
                         color: functions.checkPhoneNumber(
                                 _model.phoneFieldTextController.text)
                             ? FlutterFlowTheme.of(context).primary
-                            : FlutterFlowTheme.of(context).grey,
+                            : FlutterFlowTheme.of(context).passiveColor,
                         textStyle:
                             FlutterFlowTheme.of(context).labelLarge.override(
                                   fontFamily: 'Lato',

@@ -16,3 +16,34 @@ bool checkPhoneNumber(String phone) {
   print('phone.length >> ${phone.length}');
   return phone.length == 18;
 }
+
+bool isEmptyPhoto(String photo) {
+  print('photo >> ${photo} <<');
+  return photo.isEmpty;
+}
+
+bool stringIsEmpty(String str) {
+  return str.isEmpty;
+}
+
+String changeTextOnButton(
+  bool isDriver,
+  bool isPassenger,
+) {
+  if (isDriver) {
+    return 'СОЗДАТЬ ПОЕЗДКУ';
+  } else if (isPassenger) {
+    return 'НАЙТИ ПОЕЗДКУ';
+  } else {
+    return 'ВЫБЕРИТЕ ДЕЙСТВИЕ';
+  }
+}
+
+bool isButtonActive(
+  bool isDriver,
+  bool isPassenger,
+  String from,
+  String to,
+) {
+  return (isDriver || isPassenger) && from.isNotEmpty && to.isNotEmpty;
+}

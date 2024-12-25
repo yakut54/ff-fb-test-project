@@ -66,6 +66,11 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get listOfTrips => _listOfTrips ?? const [];
   bool hasListOfTrips() => _listOfTrips != null;
 
+  // "profile_is_bool" field.
+  bool? _profileIsBool;
+  bool get profileIsBool => _profileIsBool ?? false;
+  bool hasProfileIsBool() => _profileIsBool != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -77,6 +82,7 @@ class UsersRecord extends FirestoreRecord {
     _image = snapshotData['image'] as String?;
     _cars = getDataList(snapshotData['cars']);
     _listOfTrips = getDataList(snapshotData['list_of_trips']);
+    _profileIsBool = snapshotData['profile_is_bool'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -121,6 +127,7 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   String? name,
   String? image,
+  bool? profileIsBool,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -132,6 +139,7 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'name': name,
       'image': image,
+      'profile_is_bool': profileIsBool,
     }.withoutNulls,
   );
 
@@ -153,7 +161,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.name == e2?.name &&
         e1?.image == e2?.image &&
         listEquality.equals(e1?.cars, e2?.cars) &&
-        listEquality.equals(e1?.listOfTrips, e2?.listOfTrips);
+        listEquality.equals(e1?.listOfTrips, e2?.listOfTrips) &&
+        e1?.profileIsBool == e2?.profileIsBool;
   }
 
   @override
@@ -167,7 +176,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.name,
         e?.image,
         e?.cars,
-        e?.listOfTrips
+        e?.listOfTrips,
+        e?.profileIsBool
       ]);
 
   @override

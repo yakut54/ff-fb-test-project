@@ -97,6 +97,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SMSPage',
           path: '/sMSPage',
           builder: (context, params) => const SMSPageWidget(),
+        ),
+        FFRoute(
+          name: 'FillProfilePage',
+          path: '/fillProfilePage',
+          builder: (context, params) => const FillProfilePageWidget(),
+        ),
+        FFRoute(
+          name: 'CitySearchPage',
+          path: '/citySearchPage',
+          builder: (context, params) => CitySearchPageWidget(
+            isFrom: params.getParam(
+              'isFrom',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CreateTripPage',
+          path: '/createTripPage',
+          builder: (context, params) => const CreateTripPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
