@@ -122,6 +122,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AddCarPage',
           path: '/addCarPage',
           builder: (context, params) => const AddCarPageWidget(),
+        ),
+        FFRoute(
+          name: 'TestPage',
+          path: '/testPage',
+          builder: (context, params) => const TestPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

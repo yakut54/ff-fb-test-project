@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/backend/backend.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -42,5 +44,23 @@ class FFAppState extends ChangeNotifier {
   String get to => _to;
   set to(String value) {
     _to = value;
+  }
+
+  String _mark = '';
+  String get mark => _mark;
+  set mark(String value) {
+    _mark = value;
+  }
+
+  String _model = '';
+  String get model => _model;
+  set model(String value) {
+    _model = value;
+  }
+
+  DocumentReference? _selectedCar;
+  DocumentReference? get selectedCar => _selectedCar;
+  set selectedCar(DocumentReference? value) {
+    _selectedCar = value;
   }
 }

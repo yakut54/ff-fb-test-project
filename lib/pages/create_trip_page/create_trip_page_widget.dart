@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'create_trip_page_model.dart';
 export 'create_trip_page_model.dart';
 
@@ -35,6 +36,8 @@ class _CreateTripPageWidgetState extends State<CreateTripPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -170,7 +173,7 @@ class _CreateTripPageWidgetState extends State<CreateTripPageWidget> {
                               ),
                               if (!functions.checkDate(_model.datePicked))
                                 Text(
-                                  'Дата поездки',
+                                  'Дата поездки ',
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .override(
@@ -178,7 +181,7 @@ class _CreateTripPageWidgetState extends State<CreateTripPageWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                 ),
-                              if (!functions.checkDate(_model.datePicked))
+                              if (functions.checkDate(_model.datePicked))
                                 Text(
                                   dateTimeFormat("yMd", _model.datePicked),
                                   style: FlutterFlowTheme.of(context)
@@ -246,81 +249,104 @@ class _CreateTripPageWidgetState extends State<CreateTripPageWidget> {
                                     final carItemContainerCarUserRecord =
                                         snapshot.data!;
 
-                                    return Material(
-                                      color: Colors.transparent,
-                                      elevation: 2.0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Container(
-                                        width: 100.0,
-                                        height: 100.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        FFAppState().selectedCar = carItem;
+                                        safeSetState(() {});
+                                      },
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        elevation: 2.0,
+                                        shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius: const BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(10.0),
-                                                bottomRight:
-                                                    Radius.circular(0.0),
-                                                topLeft: Radius.circular(10.0),
-                                                topRight: Radius.circular(0.0),
-                                              ),
-                                              child: Image.network(
-                                                carItemContainerCarUserRecord
-                                                    .image,
-                                                width: 120.0,
-                                                height: 100.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '${carItemContainerCarUserRecord.mark}, ${carItemContainerCarUserRecord.model}',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .headlineMedium
-                                                          .override(
-                                                            fontFamily: 'Lato',
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                    ),
-                                                    Text(
-                                                      carItemContainerCarUserRecord
-                                                          .regNumber,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .headlineMedium
-                                                          .override(
-                                                            fontFamily: 'Lato',
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                    ),
-                                                  ],
+                                        child: Container(
+                                          width: 100.0,
+                                          height: 100.0,
+                                          decoration: BoxDecoration(
+                                            color: FFAppState().selectedCar ==
+                                                    carItemContainerCarUserRecord
+                                                        .reference
+                                                ? const Color(0xFFA7C8FF)
+                                                : FlutterFlowTheme.of(context)
+                                                    .white,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius: const BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(10.0),
+                                                  bottomRight:
+                                                      Radius.circular(0.0),
+                                                  topLeft:
+                                                      Radius.circular(10.0),
+                                                  topRight:
+                                                      Radius.circular(0.0),
+                                                ),
+                                                child: Image.network(
+                                                  'https://images.unsplash.com/photo-1486496572940-2bb2341fdbdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMHx8Y2FyfGVufDB8fHx8MTczNTM2Mzk1N3ww&ixlib=rb-4.0.3&q=80&w=1080',
+                                                  width: 120.0,
+                                                  height: 100.0,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          10.0, 0.0, 0.0, 0.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        '${carItemContainerCarUserRecord.mark}, ${carItemContainerCarUserRecord.model}',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Lato',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                      Text(
+                                                        carItemContainerCarUserRecord
+                                                            .regNumber,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Lato',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );
@@ -336,8 +362,8 @@ class _CreateTripPageWidgetState extends State<CreateTripPageWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          context.pushNamed('AddCarPage');
                         },
                         text: '+ ДОБАВИТЬ АВТО',
                         options: FFButtonOptions(
@@ -365,8 +391,37 @@ class _CreateTripPageWidgetState extends State<CreateTripPageWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 20.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    var tripsRecordReference = TripsRecord.collection.doc();
+                    await tripsRecordReference.set(createTripsRecordData(
+                      from: FFAppState().from,
+                      to: FFAppState().to,
+                      when: _model.datePicked,
+                      car: FFAppState().selectedCar,
+                      driver: currentUserReference,
+                    ));
+                    _model.trip = TripsRecord.getDocumentFromData(
+                        createTripsRecordData(
+                          from: FFAppState().from,
+                          to: FFAppState().to,
+                          when: _model.datePicked,
+                          car: FFAppState().selectedCar,
+                          driver: currentUserReference,
+                        ),
+                        tripsRecordReference);
+
+                    await currentUserReference!.update({
+                      ...mapToFirestore(
+                        {
+                          'list_of_trips':
+                              FieldValue.arrayUnion([_model.trip?.reference]),
+                        },
+                      ),
+                    });
+
+                    context.goNamed('HomePage');
+
+                    safeSetState(() {});
                   },
                   text: 'ОПУБЛИКОВАТЬ ПОЕЗДКУ',
                   options: FFButtonOptions(

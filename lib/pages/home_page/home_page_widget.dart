@@ -210,7 +210,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
-                                              if (functions.stringIsEmpty(
+                                              if (!functions.stringIsEmpty(
                                                   FFAppState().to))
                                                 Padding(
                                                   padding: const EdgeInsetsDirectional

@@ -51,5 +51,17 @@ bool isButtonActive(
 bool checkDate(DateTime? date) {
   print('date >>> $date');
 
-  return true;
+  return date != null;
+}
+
+bool checkIfCarValid(
+  String photo,
+  String mark,
+  String model,
+  String regnumber,
+) {
+  return photo.isNotEmpty &&
+      mark.isNotEmpty &&
+      model.isNotEmpty &&
+      regnumber.isNotEmpty;
 }
